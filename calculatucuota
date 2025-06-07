@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calcula tu Ahorro</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e9f2ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #003366;
+      font-size: 26px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 30px;
+      background-color: #28a745;
+      color: white;
+      padding: 14px;
+      border: none;
+      width: 100%;
+      font-size: 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>¡Calcula tu ahorro en luz y gas!</h1>
+    <form id="ahorroForm">
+      <label>¿Tienes luz?</label>
+      <div class="checkbox-group">
+        <label><input type="radio" name="luz" value="Sí" required> Sí</label>
+        <label><input type="radio" name="luz" value="No"> No</label>
+      </div>
+
+      <label>¿Tienes gas?</label>
+      <div class="checkbox-group">
+        <label><input type="radio" name="gas" value="Sí" required> Sí</label>
+        <label><input type="radio" name="gas" value="No"> No</label>
+      </div>
+
+      <label>Tu nombre</label>
+      <input type="text" id="nombre" required placeholder="Ej. María Pérez" />
+
+      <label>¿Con qué compañía estás?</label>
+      <input type="text" id="compania" required placeholder="Ej. Naturgy" />
+
+      <label>Adjunta tu factura (opcional)</label>
+      <input type="file" id="factura" accept="image/*,application/pdf" />
+
+      <button type="submit">Calcular mi cuota</button>
+    </form>
+
+    <div class="footer">Atención directa y personalizada • Sin robots</div>
+  </div>
+
+  <script>
+    document.getElementById("ahorroForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const luz = document.querySelector('input[name="luz"]:checked')?.value || "";
+      const gas = document.querySelector('input[name="gas"]:checked')?.value || "";
+      const nombre = document.getElementById("nombre").value.trim();
+      const compania = document.getElementById("compania").value.trim();
+
+      const mensaje = `Hola, soy ${nombre}. 
+✅ ¿Tienes luz?: ${luz} 
+✅ ¿Tienes gas?: ${gas} 
+🏷 Compañía actual: ${compania} 
+📎 Tengo una factura adjunta: ${document.getElementById("factura").value ? "Sí" : "No"}`;
+
+      const whatsappLink = https://wa.me/34647328161?text=${encodeURIComponent(mensaje)};
+      window.open(whatsappLink, "_blank");
+    });
+  </script>
+</body>
+</html>
